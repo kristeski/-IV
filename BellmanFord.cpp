@@ -39,7 +39,7 @@ int main() {
         cout << "Grafot sodrzi negativni ciklusi\n";
     } else {
         for (int i = 1; i <= n; i++) {
-            if (dist[i] == inf) cout << "nedostapno";
+            if (dist[i] == inf) cout << " nedostapno ";
             else cout << dist[i] << " ";
         }
         cout << "\n";
