@@ -1,0 +1,181 @@
+
+
+
+------- NEW GRAPH -------
+Detektiran negativen ciklus!
+
+
+
+
+------- NEW GRAPH -------
+Najkratok pat do teminja od pocetno teme 1:
+do 1: 0
+do 2: 41
+do 3: 16
+do 4: 14
+do 5: 3
+
+
+
+
+------- NEW GRAPH -------
+Detektiran negativen ciklus!
+
+
+
+
+------- NEW GRAPH -------
+Najkratok pat do teminja od pocetno teme 1:
+do 1: 0
+do 2: 69
+do 3: 87
+do 4: 110
+do 5: 142
+do 6: 128
+do 7: 53
+do 8: 143
+do 9: 3
+do 10: 19
+do 11: 104
+do 12: 16
+
+
+
+
+------- NEW GRAPH -------
+Najkratok pat do teminja od pocetno teme 1:
+do 1: 0
+do 2: 15
+do 3: 163
+do 4: 86
+do 5: 9
+do 6: 61
+do 7: 86
+do 8: 111
+do 9: 49
+do 10: 14
+do 11: 65
+do 12: -14
+do 13: 1
+do 14: 19
+do 15: 25
+do 16: 82
+do 17: 62
+do 18: 118
+do 19: 40
+do 20: 16
+do 21: 43
+do 22: 39
+do 23: 153
+do 24: 126
+
+
+
+
+------- NEW GRAPH -------
+Detektiran negativen ciklus!
+
+
+
+
+------- NEW GRAPH -------
+Najkratok pat do teminja od pocetno teme 1:
+do 1: 0
+do 2: 89
+do 3: 94
+do 4: 89
+do 5: 66
+do 6: 75
+do 7: 91
+do 8: 44
+do 9: 107
+do 10: 95
+do 11: 89
+do 12: 54
+do 13: 59
+do 14: 43
+do 15: 36
+do 16: 75
+do 17: 57
+do 18: 95
+do 19: 85
+do 20: 48
+do 21: 59
+do 22: 63
+do 23: 72
+do 24: 75
+do 25: 43
+do 26: 62
+do 27: 45
+do 28: 45
+do 29: 77
+do 30: 26
+do 31: 80
+do 32: 46
+do 33: 18
+do 34: 45
+do 35: 60
+
+
+
+
+------- NEW GRAPH -------
+Najkratok pat do teminja od pocetno teme 1:
+do 1: 0
+do 2: 140
+do 3: 133
+do 4: 28
+do 5: 168
+do 6: 114
+do 7: 70
+do 8: 202
+do 9: 70
+do 10: 95
+do 11: 43
+do 12: 69
+do 13: 33
+do 14: 175
+do 15: 84
+do 16: 31
+do 17: 127
+do 18: 54
+do 19: 45
+do 20: 97
+do 21: 80
+do 22: 211
+do 23: 45
+do 24: 112
+do 25: 184
+do 26: 82
+do 27: 26
+do 28: 21
+
+
+
+
+------- NEW GRAPH -------
+Detektiran negativen ciklus!
+
+
+
+
+------- NEW GRAPH -------
+Najkratok pat do teminja od pocetno teme 1:
+do 1: 0
+do 2: 34
+do 3: 81
+do 4: 28
+do 5: 125
+do 6: 82
+do 7: 77
+do 8: 79
+do 9: 26
+do 10: 61
+do 11: 72
+do 12: 77
+do 13: 34
+do 14: 30
+do 15: 75
+do 16: 93
+do 17: 44
+

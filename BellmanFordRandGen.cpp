@@ -22,21 +22,24 @@ void uni(int a, int b) {
     dsu[b] = a;
 }
 
+bool custcomparator(const edge &e1, const edge &e2) {
+    return tie(e1.fr, e1.to, e1.wei) < tie(e2.fr, e2.to, e2.wei);
+}
+
 int main() {
     random_device rd;
     mt19937 rng(rd());
 
-    uniform_int_distribution<int> nodeDist(2, 60);
+    uniform_int_distribution<int> nodeDist(2, 50);
     int nodes = nodeDist(rng);
 
     uniform_int_distribution<int> extraEdges(0, nodes - 1);
-    int edges = nodes + extraEdges(rng);
+    int edges = 2 * (nodes - 1) + extraEdges(rng);
 
     uniform_int_distribution<int> randomNode(1, nodes);
-    uniform_int_distribution<int> randomWeight(-25, 50);
+    uniform_int_distribution<int> randomWeight(-20, 50);
 
-    dsu.resize(nodes + 1, -1);
-    set<pair<int,int>> used;
+    dsu.assign(nodes + 1, -1);
 
     for (int i = 2; i <= nodes; i++) {
         int ran = randomNode(rng);
@@ -44,55 +47,45 @@ int main() {
             ran = randomNode(rng);
         }
         int wei = randomWeight(rng);
-        edgelist.push_back({i, ran, wei});
-        edgelist.push_back({ran, i, wei});
-        used.insert({min(i, ran), max(i, ran)});
+        edgelist.push_back({i, ran, abs(wei)});
+        edgelist.push_back({ran, i, abs(wei)});
         uni(i, ran);
     }
 
-    edges -= (nodes - 1);
+    edges -= 2 * (nodes - 1);
     while (edges--) {
-        int a = randomNode(rng);
-        int b = randomNode(rng);
-
-        if (a == b) { 
+        int a = randomNode(rng), b = randomNode(rng);
+        if (a == b) {
             edges++; 
-            continue; 
+            continue;
         }
-        
-        if (used.count({min(a, b), max(a, b)})) { 
-            edges++;
-            continue; 
-        }
-
         int wei = randomWeight(rng);
         edgelist.push_back({a, b, wei});
-        edgelist.push_back({b, a, wei});
-        used.insert({min(a, b), max(a, b)});
     }
 
-    ofstream foutGraph("graph.txt");
-    foutGraph << nodes << " " << used.size() << "\n"; 
-    for (auto &p : used) {
-        for (auto &e : edgelist) {
-            if ((min(e.fr, e.to) == p.first) && (max(e.fr, e.to) == p.second)) {
-                foutGraph << "Rebro pomegju: " << p.first << " i " << p.second << " so dolzina: " << e.wei << '\n';
-                break;
-            }
-        }
-    }
+    ofstream foutGraph("RandomGenGraph.txt", ios::app);
+    foutGraph << "\n\n\n------- NEW GRAPH -------\n";
+    foutGraph << "Teminja: " << nodes << "\nRebra: " << edgelist.size() << "\n";
+    foutGraph << "--Teme1--  --Teme2--  --Tezina--\n"; 
 
-
+    sort(edgelist.begin(), edgelist.end(), custcomparator);
+    for(auto e : edgelist) 
+        foutGraph << "   " << e.fr << "        " << e.to << "         " << e.wei << '\n';
+            
+    
     const int INF = 1 << 29;
     vector<int> dist(nodes + 1, INF);
     dist[1] = 0;
 
     for (int i = 1; i <= nodes - 1; i++) {
+        bool updated = false;
         for (auto &e : edgelist) {
             if (dist[e.fr] != INF && dist[e.fr] + e.wei < dist[e.to]) {
                 dist[e.to] = dist[e.fr] + e.wei;
+                updated = true;
             }
         }
+        if (!updated) break;
     }
 
     bool negCycle = false;
@@ -102,19 +95,20 @@ int main() {
             break;
         }
     }
-
-    ofstream foutResult("result.txt");
+    ofstream foutResult("Result.txt", ios::app);
+    foutResult << "\n\n\n------- NEW GRAPH -------\n";
     if (negCycle) {
-        foutResult << "Detektiran negativen ciklus\n";
+        foutResult << "Detektiran negativen ciklus!\n";
     } else {
         foutResult << "Najkratok pat do teminja od pocetno teme 1:\n";
         for (int i = 1; i <= nodes; i++) {
-            if (dist[i] >= INF/2)
+            if (dist[i] == INF)
                 foutResult << "do " << i << ": nedostapno\n";
             else
                 foutResult << "do " << i << ": " << dist[i] << "\n";
         }
     }
 
+    foutResult << "\n";
     return 0;
 }
