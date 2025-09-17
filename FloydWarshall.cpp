@@ -1,8 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-const int V = 1001;
-int dp[V][V], v, e; // dp[i][j] najkratkiot pat od i do j
+const int V = 1001, inf = (1 << 29);
+int dp[V][V], v, e; // dp[i][j] најкраток пат од i до j
 
 int main() {
     
@@ -10,7 +10,7 @@ int main() {
 
     for(int i = 0; i <= v; i++)
         for(int j = 0; j <= v; j++)
-            dp[i][j] = (i == j) ? 0 : (1 << 28);
+            dp[i][j] = (i == j) ? 0 : inf;
 
     while(e--) {
         int a, b, c;
@@ -19,14 +19,16 @@ int main() {
         dp[b][a] = min(dp[b][a], c);
     }
 
-    for(int k = 1; k <= v; k++) 
-        for(int i = 1; i <= v; i++) 
-            for(int j = 1; j <= v; j++)
+    for(int k = 1; k <= v; k++) {
+        cout << "Состојба со прв/ите " << k << " можни посредни темиња\n";
+        for(int i = 1; i <= v; i++) {
+            cout << "Дистанца од теме број " << i << " до останатите\n";
+            for(int j = 1; j <= v; j++) {
                 dp[i][j] = min(dp[i][j], dp[i][k] + dp[k][j]);
-        
-    for(int i = 1; i <= v; i++) {
-        cout << endl << "OD " << i << endl;
-        for(int j = 1; j <= v; j++) 
-            cout << j << " " << dp[i][j] << endl;   
+                cout << ((dp[i][j] == inf) ? (char)236 : dp[i][j]) << " ";
+            }
+            cout << endl;
+        }
     }
+        
 }
