@@ -63,6 +63,9 @@ int main() {
         for(int i = p2.first; i <= p2.second; i++) 
             for(int j = p1.first; j <= p1.second; j++) 
                 update(i, j);
+        for(auto i : edgel) 
+            cout << "Дистанца од теме " << get<0>(i) << " до " << get<1>(i) << " е: " << get<2>(i) << '\n';
     }
+    
     return 0;
 }
