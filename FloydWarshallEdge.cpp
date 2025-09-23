@@ -23,7 +23,7 @@ void update(int indx1, int indx2) { //indx1 - prevrteno indx2 originalno
     int node2 = get<1>(edgel[indx2]);
     int weight = get<2>(edgel[indx2]);
     weight += get<2>(edgel[used[kluc(get<1>(invedgel[indx1]), get<0>(invedgel[indx1]))]]);
-    int indx = kluc(node1, node2);
+    int indx = used[kluc(node1, node2)];
     get<2>(edgel[indx]) = min(get<2>(edgel[indx]), weight);
 }
 int main() {
