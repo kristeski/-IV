@@ -60,7 +60,7 @@ int main() {
 
     for(int k = 1; k <= v; k++) {
         pair<int, int> p1 = getr(edgel, k), p2 = getr(invedgel, k);
-        for(int i = p2.first; i <= p2.second; i++) 
+        for(int i = p2.first; i < p2.second; i++) 
             for(int j = p1.first; j <= p1.second; j++) 
                 update(i, j);
         for(auto i : edgel) 
