@@ -5,7 +5,7 @@ struct Edge {
     int u, v, w; 
 };
 
-const int inf = INT32_MAX >> 1;
+const int inf = 1 << 29;
 
 int main() {
     int n, m;
