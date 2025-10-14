@@ -1,91 +1,69 @@
+//RiciBoss
 #include <bits/stdc++.h>
 using namespace std;
-using ll = long long;
+const int V = 501, INF = 1e9;
 
-struct Edge {
-    int to;         
-    int rev;        
-    ll cap;         
-    Edge(int _to, int _rev, ll _cap) : to(_to), rev(_rev), cap(_cap) {}
-};
+int cap[V][V], p[V], v, e;
+vector<int> adj[V];
 
-struct MaxFlow {
-    int n;
-    vector<vector<Edge>> g;
-    vector<char> seen;         
-    MaxFlow(int n) : n(n), g(n), seen(n) {}
+int bfs(int s, int t) {
+    for(int i = 0; i < V; i++)
+        p[i] = -1;
+    p[s] = -2;
 
-    void addEdge(int u, int v, ll c) {
-        g[u].emplace_back(v, (int)g[v].size(), c);
-        g[v].emplace_back(u, (int)g[u].size() - 1, 0); 
-    }
+    queue<pair<int, int>> q;
+    q.push({s, INF});
 
-    ll dfs(int u, int t, ll f, vector<int>& path) {
-        if (u == t) {
-            path.push_back(u);
-            return f;
-        }
-        seen[u] = 1;
-        path.push_back(u);
-        for (auto& e : g[u]) {
-            if (!seen[e.to] && e.cap > 0) {
-                ll pushed = dfs(e.to, t, min(f, e.cap), path);
-                if (pushed > 0) {
-                    e.cap -= pushed;
-                    g[e.to][e.rev].cap += pushed;
-                    return pushed;
-                }
-            }
-        }
-        path.pop_back();
-        return 0;
-    }
-
-    ll maxFlow(int s, int t) {
-        ll flow = 0;
-        while (true) {
-            fill(seen.begin(), seen.end(), 0);
-            vector<int> path;
-            ll pushed = dfs(s, t, LLONG_MAX, path);
-            if (pushed == 0) break;
-            cout << "Augmenting path (flow = " << pushed << "): ";
-            for (size_t i = 0; i < path.size(); ++i) {
-                if (i) cout << " -> ";
-                cout << path[i];
-            }
-            cout << "\n";
-            flow += pushed;
-        }
-        return flow;
-    }
-
-    void printResidual() {
-        cout << "Residual graph:\n";
-        for (int u = 0; u < n; ++u) {
-            for (auto& e : g[u]) {
-                if (e.cap > 0)
-                    cout << "  " << u << " -> " << e.to << " : cap = " << e.cap << "\n";
+    while(!q.empty()) {
+        auto[u, flow] = q.front();
+        q.pop();
+        
+        for(int nei : adj[u]) {
+            if(p[nei] == -1 && cap[u][nei]) {
+                p[nei] = u;
+                int new_flow = min(flow, cap[u][nei]);
+                if(nei == t)
+                    return new_flow;
+                q.push({nei, new_flow});
             }
         }
     }
-};
-
-int main() {
-    int N = 6;
-    MaxFlow mf(N);
-    mf.addEdge(0, 1, 7);
-    mf.addEdge(0, 2, 4);
-    mf.addEdge(2, 1, 3);
-    mf.addEdge(1, 3, 5);
-    mf.addEdge(1, 4, 3);
-    mf.addEdge(2, 4, 2);
-    mf.addEdge(3, 5, 8);
-    mf.addEdge(4, 5, 5);
-
-    int s = 0, t = 5;
-    cout << "Computing max flow from " << s << " to " << t << "...\n\n";
-    ll maxflow = mf.maxFlow(s, t);
-    cout << "\nMax flow = " << maxflow << "\n\n";
-    mf.printResidual();
     return 0;
+}
+
+void max_flow(int s, int t) {
+    int MAX_FLOW = 0, flow;
+    while(flow = bfs(s, t)) {
+        MAX_FLOW += flow;
+        int cur = t;
+        stack<int> path;
+        while(p[cur] != -2) {
+            path.push(cur);
+            cap[p[cur]][cur] -= flow;
+            cap[cur][p[cur]] += flow;
+            cur = p[cur];
+        }
+        path.push(s);
+
+        cout << "Augmenting path: ";
+        while(!path.empty()) {
+            cout << path.top();
+            if(path.size() > 1)
+                cout << " -> ";
+            path.pop();
+        }
+        cout << " | Flow added: " << flow << '\n';
+    }
+    cout << "Maximum flow = " << MAX_FLOW;
+}
+int main() {
+    cin >> v >> e;
+    while(e--) {
+        int a, b, w;
+        cin >> a >> b >> w;
+        adj[a].push_back(b);
+        adj[b].push_back(a);
+        cap[a][b] += w;
+    }
+    max_flow(1, v);
 }
