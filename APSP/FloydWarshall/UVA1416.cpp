@@ -7,7 +7,7 @@ ll v, m, l;
 const ll N = 101, inf = 1e18;
 
 struct Edge {
-    ll u, v, w;
+     ll u, v, w;
 };
 
 ll floyd(const vector<Edge> &vec, ll ban) {
@@ -36,6 +36,9 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL); cout.tie(NULL);
 
+
+    cout << CLOCKS_PER_SEC << endl;
+    return 0;
     while(cin >> v >> m >> l) {
         vector<Edge> edgelist;
         edgelist.reserve(10 * N);

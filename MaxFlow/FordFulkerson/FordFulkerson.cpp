@@ -1,4 +1,3 @@
-//RiciBoss
 #include <bits/stdc++.h>
 using namespace std;
 const int V = 501, INF = 1e9;
