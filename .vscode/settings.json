@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "tuple": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "xiosbase": "cpp",
+        "iostream": "cpp"
     }
 }
